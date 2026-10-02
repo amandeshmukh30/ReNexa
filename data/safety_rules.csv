@@ -1,0 +1,34 @@
+rule_id,material,operation,status,warning,reason,source,verification_status,last_reviewed
+SAF-BAT-001,battery,reuse,BLOCK,Hazardous chemical and fire risk,Household batteries contain toxic electrolytes and heavy metals. Cutting heating or dismantling batteries causes chemical burns or explosion.,EPA Household Hazardous Waste Guidelines,verified,2026-10-02
+SAF-BAT-002,battery,repair,BLOCK,Critical battery safety violation,Never attempt DIY repair on degraded swollen or leaking battery cells.,National E-Waste Safety Standards,verified,2026-10-02
+SAF-BAT-003,battery,upcycle,BLOCK,Hazardous reuse prohibition,Spent batteries must not be repurposed for craft or hobby projects.,National E-Waste Safety Standards,verified,2026-10-02
+SAF-BAT-004,battery,dispose,ALLOW,Safe battery handling,Tape positive terminals with electrical tape and use dedicated e-waste battery collection bin.,EPA Household Waste Guidance,verified,2026-10-02
+SAF-PLA-001,plastic,thermal_processing,BLOCK,Toxic fume hazard,Melting or burning plastic at home releases carcinogenic dioxins and hazardous fumes.,OSHA Plastic Fabrication Safety Guidelines,verified,2026-10-02
+SAF-PLA-002,plastic,cutting,WARN,Sharp edge precaution,Use utility knives with care and keep cutting strokes away from hands.,Established DIY Safety Manual,verified,2026-10-02
+SAF-PLA-003,plastic,reuse,ALLOW,Standard low-risk household reuse,Clean plastic containers are safe for non-toxic dry storage and gardening.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-PLA-004,plastic,upcycle,ALLOW,Standard mechanical upcycling,Cutting and binding plastic items with tape or non-toxic adhesives is safe.,Established DIY Safety Manual,verified,2026-10-02
+SAF-PLA-005,plastic,recycle,ALLOW,Safe recycling preparation,Rinsing and flattening plastic containers presents no significant safety hazard.,Municipal Recycling Guidelines,verified,2026-10-02
+SAF-GLA-001,glass,cutting,WARN,Laceration risk,Cutting or scoring glass requires safety glasses and protective cut-resistant gloves.,OSHA Hand and Eye Safety Standards,verified,2026-10-02
+SAF-GLA-002,glass,reuse,ALLOW,Safe glassware reuse,Washing and reusing intact glass bottles and jars is safe for household use.,EPA Household Waste Guidance,verified,2026-10-02
+SAF-GLA-003,glass,upcycle,ALLOW,Safe glass container transformation,Decorating or filling glass jars with soil/pebbles without scoring is safe.,Established DIY Safety Manual,verified,2026-10-02
+SAF-GLA-004,glass,recycle,ALLOW,Safe glass cullet preparation,Sorting and rinsing unbroken glass containers is safe.,Municipal Recycling Guidelines,verified,2026-10-02
+SAF-MET-001,metal,cutting,WARN,Sharp burr and pinch hazard,Cutting or punching metal tins creates sharp jagged edges. Use safety gloves.,Established Workshop Safety Guide,verified,2026-10-02
+SAF-MET-002,metal,reuse,ALLOW,Safe metal container reuse,Using smooth-rimmed clean tins for storage is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-MET-003,metal,upcycle,ALLOW,Safe metal upcycling,Punching drainage holes with a hammer and nail is safe when wearing eye protection.,Established Workshop Safety Guide,verified,2026-10-02
+SAF-MET-004,metal,recycle,ALLOW,Safe metal scrap prep,Compressing clean cans and foil is safe.,Municipal Recycling Guidelines,verified,2026-10-02
+SAF-PAP-001,paper,any,ALLOW,Safe paper handling,Paper handling cutting and binding is inherently safe for all household users.,Standard Educational Resource,verified,2026-10-02
+SAF-CAR-001,cardboard,cutting,WARN,Blade safety precaution,Always use a cutting mat and keep fingers behind the blade path when using utility knives.,OSHA Workshop Safety Guidelines,verified,2026-10-02
+SAF-CAR-002,cardboard,reuse,ALLOW,Safe cardboard reuse,Reusing clean cartons for storage and mailing is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-CAR-003,cardboard,upcycle,ALLOW,Safe cardboard assembly,Cutting and gluing cardboard organizers is safe.,Established DIY Safety Manual,verified,2026-10-02
+SAF-CAR-004,cardboard,recycle,ALLOW,Safe cardboard bundling,Flattening and tying cardboard bundles is safe.,Municipal Recycling Guidelines,verified,2026-10-02
+SAF-CLO-001,clothes,repair,ALLOW,Safe needle handling,Take care with sharp needles and pins during sewing and mending.,Home Economics Craft Guidelines,verified,2026-10-02
+SAF-CLO-002,clothes,reuse,ALLOW,Safe textile repurposing,Cutting clean worn garments into dusting cloths is safe.,EPA Household Waste Guidance,verified,2026-10-02
+SAF-CLO-003,clothes,upcycle,ALLOW,Safe textile fabrication,Transforming fabric into bags with standard scissors and thread is safe.,Established DIY Safety Manual,verified,2026-10-02
+SAF-CLO-004,clothes,recycle,ALLOW,Safe textile donation,Folding clean clothes for donation or textile drop-off is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-SHO-001,shoes,repair,WARN,Chemical adhesive ventilation,Use shoe adhesives in a well-ventilated room or outdoors away from open flames.,OSHA Solvent and Adhesive Safety,verified,2026-10-02
+SAF-SHO-002,shoes,reuse,ALLOW,Safe footwear reuse,Using clean worn footwear for yard work is safe.,Established Household Guide,verified,2026-10-02
+SAF-SHO-003,shoes,recycle,ALLOW,Safe footwear drop-off,Tying shoe pairs for donation or recycling bin drop-off is safe.,Municipal Recycling Guidelines,verified,2026-10-02
+SAF-BIO-001,biological,compost,ALLOW,Safe composting practice,Layering vegetable peels and leaves in a compost pit is safe. Wash hands after handling.,EPA Composting at Home Guidelines,verified,2026-10-02
+SAF-BIO-002,biological,dispose,ALLOW,Safe wet waste segregation,Segregating kitchen food scraps into green bins is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-TRA-001,trash,dispose,ALLOW,Safe residual waste bagging,Bagging non-recyclable refuse for municipal collection is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
+SAF-GEN-001,any,chemical_treatment,BLOCK,Prohibited toxic chemical processing,Do not perform acid leaching solvent extraction or open burning on any household waste.,EPA Hazardous Waste Safety Standards,verified,2026-10-02

@@ -1,0 +1,50 @@
+# ── Python ──────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# ── Virtual Environment ────────────────────
+venv/
+env/
+.venv/
+
+# ── Environment Variables / Secrets ────────
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# ── Test Caches & Artifacts ────────────────
+.pytest_cache/
+runs/
+scratch/
+
+# ── IDE ────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Jupyter ────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Data (keep structure, ignore large raw datasets)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# ── Streamlit ──────────────────────────────
+# Keep .streamlit/config.toml for cloud theme
