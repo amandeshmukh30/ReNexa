@@ -20,6 +20,7 @@ from utils.ui import (
     render_renexa_header,
     render_dashboard_card,
     metric_card,
+    show_splash,
     PRIMARY,
     SURFACE,
     BORDER,
@@ -33,11 +34,15 @@ from services.recovery_service import load_recovery_pathways
 # ── Page config ────────────────────────────────────────────────────────────
 configure_page(title="ReNexa — Give Waste Its Next Life", icon="♻️", layout="wide")
 
+# ── Opening Splash Screen Animation (Once per session) ────────────────────
+show_splash()
+
 # ── Sidebar navigation ───────────────────────────────────────────────────
 render_sidebar(current_page="main.py")
 
 # ── Hero Header ───────────────────────────────────────────────────────────
 render_renexa_header()
+
 
 # ── Primary CTAs ──────────────────────────────────────────────────────────
 cta_col1, cta_col2 = st.columns(2)

@@ -272,5 +272,19 @@
     "why_this": [],
     "why_not_this": [],
     "warnings": []
+  },
+  {
+    "id": "d50ca47b-32c2-4ac9-920e-925335bc6f93",
+    "scan_id": "",
+    "created_at": "2026-10-02T18:14:20.563036Z",
+    "pathway_id": "",
+    "pathway_title": "",
+    "pathway_type": "reuse",
+    "rank": 1,
+    "mcda_score": 0.0,
+    "criterion_scores": {},
+    "why_this": [],
+    "why_not_this": [],
+    "warnings": []
   }
 ]

@@ -500,3 +500,129 @@ def empty_state(message, icon="📭", cta_text=None, cta_page=None):
     )
     if cta_text and cta_page:
         st.page_link(cta_page, label=cta_text, use_container_width=False)
+
+
+def show_splash(force: bool = False):
+    """
+    Render a short, smooth opening splash animation once per session.
+    Fades out gracefully after ~1.6s to reveal the Home Dashboard.
+    """
+    if not force and st.session_state.get("renexa_splash_shown", False):
+        return
+
+    st.session_state["renexa_splash_shown"] = True
+
+    splash_html = f"""
+    <div id="renexa-splash-screen" class="renexa-splash-overlay">
+        <div class="renexa-splash-content">
+            <div class="renexa-splash-logo">
+                <svg width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="splash-svg">
+                    <circle cx="32" cy="32" r="30" stroke="{BORDER}" stroke-width="2"/>
+                    <path d="M32 10C22 10 14 18 14 28C14 39 26 50 32 54C38 50 50 39 50 28C50 18 42 10 32 10Z" fill="{SURFACE}" stroke="{PRIMARY}" stroke-width="3" stroke-linejoin="round"/>
+                    <path d="M32 20C32 20 25 26 25 33C25 37.5 28.5 41 32 44C35.5 41 39 37.5 39 33C39 26 32 20 32 20Z" fill="{PRIMARY}"/>
+                    <path d="M32 44V26" stroke="{BACKGROUND}" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="renexa-splash-brand">ReNexa</div>
+            <div class="renexa-splash-tagline">Give Waste Its Next Life.</div>
+        </div>
+    </div>
+    <style>
+    .renexa-splash-overlay {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: {BACKGROUND};
+        z-index: 9999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: splashContainerFade 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        pointer-events: auto;
+    }}
+    .renexa-splash-content {{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+    }}
+    .renexa-splash-logo {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        animation: splashLogoGrow 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }}
+    .renexa-splash-brand {{
+        color: {TEXT_PRIMARY};
+        font-size: 2.8rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 8px;
+        animation: splashBrandAppear 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+    }}
+    .renexa-splash-tagline {{
+        color: {TEXT_SECONDARY};
+        font-size: 1.15rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        animation: splashTaglineAppear 0.6s ease-out 0.3s both;
+    }}
+
+    @keyframes splashContainerFade {{
+        0% {{ opacity: 1; visibility: visible; }}
+        78% {{ opacity: 1; visibility: visible; }}
+        100% {{ opacity: 0; visibility: hidden; pointer-events: none; }}
+    }}
+
+    @keyframes splashLogoGrow {{
+        0% {{ transform: scale(0.25); opacity: 0; }}
+        100% {{ transform: scale(1.0); opacity: 1; }}
+    }}
+
+    @keyframes splashBrandAppear {{
+        0% {{ transform: scale(0.8) translateY(12px); opacity: 0; }}
+        100% {{ transform: scale(1.0) translateY(0); opacity: 1; }}
+    }}
+
+    @keyframes splashTaglineAppear {{
+        0% {{ transform: translateY(8px); opacity: 0; }}
+        100% {{ transform: translateY(0); opacity: 1; }}
+    }}
+
+    @media (max-width: 480px) {{
+        .renexa-splash-logo svg {{
+            width: 76px;
+            height: 76px;
+        }}
+        .renexa-splash-brand {{
+            font-size: 2.2rem;
+        }}
+        .renexa-splash-tagline {{
+            font-size: 0.95rem;
+        }}
+    }}
+
+    @media (prefers-reduced-motion: reduce) {{
+        .renexa-splash-overlay {{
+            animation: splashReduced 0.2s ease-out forwards !important;
+        }}
+        .renexa-splash-logo, .renexa-splash-brand, .renexa-splash-tagline {{
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }}
+        @keyframes splashReduced {{
+            0% {{ opacity: 1; }}
+            100% {{ opacity: 0; visibility: hidden; pointer-events: none; }}
+        }}
+    }}
+    </style>
+    """
+    st.markdown(splash_html, unsafe_allow_html=True)
+

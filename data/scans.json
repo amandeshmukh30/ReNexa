@@ -130,5 +130,17 @@
     "confirmed_quantity": 1,
     "image_filename": null,
     "session_id": null
+  },
+  {
+    "id": "5aaf1dee-7d8c-452f-a9cd-890f42b9e68b",
+    "user_id": null,
+    "created_at": "2026-10-02T18:14:20.560712Z",
+    "detected_material": "unknown",
+    "model_label": null,
+    "confidence": null,
+    "detected_object_count": 1,
+    "confirmed_quantity": 1,
+    "image_filename": null,
+    "session_id": null
   }
 ]

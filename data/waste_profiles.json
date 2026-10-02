@@ -138,5 +138,17 @@
     "confirmed_quantity": 1,
     "user_confirmed": true,
     "material_breakdown": {}
+  },
+  {
+    "id": "2c2a8a37-6b1d-4694-aa30-ba4d1105f13b",
+    "scan_id": "",
+    "created_at": "2026-10-02T18:14:20.561900Z",
+    "material": "unknown",
+    "item": "Unknown",
+    "condition": "clean",
+    "contamination": "none",
+    "confirmed_quantity": 1,
+    "user_confirmed": true,
+    "material_breakdown": {}
   }
 ]
