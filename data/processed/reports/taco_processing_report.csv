@@ -1,0 +1,2 @@
+dataset,source_images,accepted_images,rejected_invalid_images,rejected_no_valid_boxes,duplicate_images,invalid_boxes,unmapped_boxes,remapped_boxes,train,val,test
+taco,1500,1492,0,8,0,227,0,4557,1193,149,150

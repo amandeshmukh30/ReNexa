@@ -1,0 +1,37 @@
+============================================================
+  ReNexa - Final Dataset Report
+============================================================
+
+DATASETS FOUND:
+  [OK] asian_waste                    images=12,627
+  [OK] mju_waste                      images= 7,425
+  [OK] mmorwad                        images= 3,300
+  [OK] taco                           images= 1,500
+  [OK] trashnet                       images= 2,527
+  [OK] zerowaste-f-final              images= 9,006
+  [SKIPPED] WaDaBa - Not available (access/licensing)
+
+TOTAL IMAGES: 36,385
+
+ANNOTATION FORMATS:
+  asian_waste                    YOLO
+  mju_waste                      Unknown
+  mmorwad                        COCO
+  taco                           COCO
+  trashnet                       Unknown
+  zerowaste-f-final              COCO / Custom JSON
+
+INVALID/WARNING IMAGES: 0
+ANNOTATION ERRORS: 3331
+DUPLICATE PAIRS: 4048
+DATA LEAKAGE INSTANCES: 1876
+
+CLASS MAPPINGS: KEEP=20, MERGE=56, REVIEW=75
+PROPOSED RENEXA CLASSES: ['cardboard', 'glass', 'metal', 'organic', 'other', 'paper', 'plastic']
+
+DETECTION DATASET: READY AFTER REVIEW
+CLASSIFICATION DATASET: READY
+ATTRIBUTE DATASET: READY
+RECOVERY KNOWLEDGE: READY AFTER REVIEW (6 issues)
+
+============================================================

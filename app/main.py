@@ -6,6 +6,12 @@ ReNexa: Give Waste Its Next Life.
 AI-Powered Waste Recovery Intelligence.
 """
 
+import warnings
+import logging
+
+warnings.filterwarnings("ignore")
+logging.disable(logging.WARNING)
+
 import streamlit as st
 import sys
 import os
@@ -13,6 +19,7 @@ import os
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
+
 
 from utils.ui import (
     configure_page,
@@ -183,3 +190,37 @@ with st.container(border=True):
         "**ReNexa** is built from the ground up for **Constraint-Aware Household Waste Recovery**, "
         "verifying whether recommendations are safe and physically executable in real-world households."
     )
+
+# ── Terminal Output: Sklearn Benchmark Accuracy & Classification Report ─────
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from services.benchmark_evaluation import evaluate_benchmarks
+
+
+def print_benchmark_metrics_to_terminal():
+    """Evaluate benchmark scenarios using scikit-learn and print results to terminal."""
+    try:
+        metrics = evaluate_benchmarks()
+        print("\n" + "=" * 70)
+        print(" [RESEARCH BENCHMARK] Evaluation Results (scikit-learn)")
+        print("=" * 70)
+        print(f" Overall Accuracy: {metrics['overall_accuracy']:.4f} ({metrics['overall_accuracy']*100:.2f}%)")
+        print("-" * 70)
+        print(" Classification Report (by Pathway ID):")
+        print(metrics["classification_report_str"])
+        print(" Performance by Material:")
+        for mat, info in metrics["by_category"].items():
+            print(f"   * {mat.capitalize():<12}: Samples={info['samples']:<2} | Accuracy={info['accuracy']*100:.1f}%")
+        print("=" * 70 + "\n")
+    except Exception as e:
+        print(f"[!] Error computing benchmark metrics: {e}")
+
+
+# Print to terminal once per session
+try:
+    if "benchmark_metrics_printed" not in st.session_state:
+        print_benchmark_metrics_to_terminal()
+        st.session_state["benchmark_metrics_printed"] = True
+except Exception:
+    print_benchmark_metrics_to_terminal()
+
+

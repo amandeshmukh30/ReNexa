@@ -502,127 +502,330 @@ def empty_state(message, icon="📭", cta_text=None, cta_page=None):
         st.page_link(cta_page, label=cta_text, use_container_width=False)
 
 
-def show_splash(force: bool = False):
-    """
-    Render a short, smooth opening splash animation once per session.
-    Fades out gracefully after ~1.6s to reveal the Home Dashboard.
-    """
-    if not force and st.session_state.get("renexa_splash_shown", False):
-        return
+import time
 
-    st.session_state["renexa_splash_shown"] = True
 
-    splash_html = f"""
+def get_splash_html() -> str:
+    """Return the complete reference-matched splash screen HTML and CSS."""
+    return f"""
     <div id="renexa-splash-screen" class="renexa-splash-overlay">
-        <div class="renexa-splash-content">
-            <div class="renexa-splash-logo">
-                <svg width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="splash-svg">
-                    <circle cx="32" cy="32" r="30" stroke="{BORDER}" stroke-width="2"/>
-                    <path d="M32 10C22 10 14 18 14 28C14 39 26 50 32 54C38 50 50 39 50 28C50 18 42 10 32 10Z" fill="{SURFACE}" stroke="{PRIMARY}" stroke-width="3" stroke-linejoin="round"/>
-                    <path d="M32 20C32 20 25 26 25 33C25 37.5 28.5 41 32 44C35.5 41 39 37.5 39 33C39 26 32 20 32 20Z" fill="{PRIMARY}"/>
-                    <path d="M32 44V26" stroke="{BACKGROUND}" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Center Content: Logo, Brand, Tagline, Subtitle -->
+        <div class="renexa-splash-center">
+            <div class="renexa-splash-logo-wrap">
+                <!-- Clean Modern Organic Eco Leaf Logo -->
+                <svg class="renexa-splash-leaf-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="leafGrad" x1="15" y1="85" x2="85" y2="15" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#76C936"/>
+                            <stop offset="100%" stop-color="#9FEA45"/>
+                        </linearGradient>
+                        <linearGradient id="leafGradDark" x1="15" y1="85" x2="85" y2="15" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0A4235"/>
+                            <stop offset="100%" stop-color="#185F32"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Left Leaf Half -->
+                    <path d="M50 12C50 12 18 32 18 62C18 78 32 88 50 88C50 88 50 12 50 12Z" fill="url(#leafGradDark)" opacity="0.9"/>
+                    <!-- Right Leaf Half -->
+                    <path d="M50 12C50 12 82 32 82 62C82 78 68 88 50 88C50 88 50 12 50 12Z" fill="url(#leafGrad)"/>
+                    <!-- Central Stem and Vein Glow -->
+                    <path d="M50 88V20" stroke="#011B18" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M50 42L66 32" stroke="#011B18" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M50 56L70 46" stroke="#011B18" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M50 70L65 62" stroke="#011B18" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
             </div>
             <div class="renexa-splash-brand">ReNexa</div>
             <div class="renexa-splash-tagline">Give Waste Its Next Life.</div>
+            <div class="renexa-splash-subtitle">
+                <span>AI-Powered Waste Recovery</span>
+                <span class="sub-break"> Intelligence.</span>
+            </div>
+        </div>
+
+        <!-- Lower Section: Stylized Eco Landscape & Rolling Hills -->
+        <div class="renexa-splash-landscape">
+            <svg class="renexa-landscape-svg" viewBox="0 0 1200 320" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hillGrad1" x1="600" y1="0" x2="600" y2="320" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#07352A" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#011B18"/>
+                    </linearGradient>
+                    <linearGradient id="hillGrad2" x1="600" y1="0" x2="600" y2="320" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0E483A"/>
+                        <stop offset="100%" stop-color="#03211B"/>
+                    </linearGradient>
+                    <linearGradient id="hillGrad3" x1="600" y1="0" x2="600" y2="320" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#185F32"/>
+                        <stop offset="100%" stop-color="#062823"/>
+                    </linearGradient>
+                    <linearGradient id="foliageGrad" x1="0" y1="120" x2="180" y2="320" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#9FEA45"/>
+                        <stop offset="50%" stop-color="#76C936"/>
+                        <stop offset="100%" stop-color="#0E483A"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Layer 1: Distant Eco City / Building Silhouettes (Center-Right Background) -->
+                <g fill="#06261F" opacity="0.65">
+                    <rect x="740" y="110" width="28" height="90" rx="3"/>
+                    <rect x="775" y="85" width="34" height="115" rx="4"/>
+                    <polygon points="792,55 778,85 806,85"/>
+                    <rect x="816" y="120" width="24" height="80" rx="3"/>
+                    <rect x="846" y="98" width="30" height="102" rx="3"/>
+                    <rect x="882" y="130" width="22" height="70" rx="2"/>
+                    <rect x="910" y="115" width="28" height="85" rx="3"/>
+                </g>
+
+                <!-- Layer 2: Distant Layered Rolling Hills -->
+                <path d="M0 160 Q 300 90, 620 140 T 1200 120 L 1200 320 L 0 320 Z" fill="url(#hillGrad1)"/>
+
+                <!-- Layer 3: Middle Layer with Stylized Tree Crowns -->
+                <g fill="#0C4436">
+                    <circle cx="280" cy="155" r="26"/>
+                    <circle cx="315" cy="148" r="32"/>
+                    <circle cx="355" cy="158" r="24"/>
+                    <circle cx="560" cy="165" r="28"/>
+                    <circle cx="595" cy="155" r="34"/>
+                    <circle cx="635" cy="168" r="22"/>
+                    <circle cx="980" cy="160" r="30"/>
+                    <circle cx="1020" cy="150" r="38"/>
+                    <circle cx="1065" cy="164" r="26"/>
+                </g>
+                <path d="M0 190 Q 340 140, 720 185 T 1200 170 L 1200 320 L 0 320 Z" fill="url(#hillGrad2)"/>
+
+                <!-- Layer 4: Foreground Rolling Contour -->
+                <path d="M0 230 Q 400 180, 850 225 T 1200 210 L 1200 320 L 0 320 Z" fill="url(#hillGrad3)"/>
+
+                <!-- Layer 5: Prominent Stylized Botanical Foliage / Large Leaf on Left -->
+                <g>
+                    <!-- Small Background Leaves -->
+                    <path d="M80 320 C 60 250, 110 200, 160 180 C 150 230, 120 280, 110 320 Z" fill="#185F32" opacity="0.8"/>
+                    <path d="M140 320 C 130 260, 180 220, 230 205 C 220 255, 190 295, 175 320 Z" fill="#2E7D32" opacity="0.7"/>
+
+                    <!-- Main Large Hero Leaf Rising from Left -->
+                    <path d="M0 320 C 0 220, 50 140, 125 110 C 135 170, 95 250, 45 320 Z" fill="url(#foliageGrad)"/>
+                    <!-- Leaf Veins -->
+                    <path d="M25 320 Q 70 210, 125 110" stroke="#07352A" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <path d="M55 240 Q 85 220, 105 190" stroke="#07352A" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <path d="M40 275 Q 70 260, 90 235" stroke="#07352A" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                    <!-- Small Sprout/Grass Accents on Right -->
+                    <path d="M1100 320 C 1105 270, 1125 240, 1150 220 C 1145 260, 1130 290, 1125 320 Z" fill="#76C936" opacity="0.9"/>
+                    <path d="M1135 320 C 1145 280, 1170 255, 1195 245 C 1185 280, 1165 305, 1155 320 Z" fill="#9FEA45" opacity="0.85"/>
+                </g>
+            </svg>
         </div>
     </div>
+
     <style>
+    /* Full-screen Dark Forest Viewport Overlay (Absolute Visual Priority) */
     .renexa-splash-overlay {{
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: {BACKGROUND};
-        z-index: 9999999;
+        background-color: #011B18;
+        z-index: 99999999;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        animation: splashContainerFade 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        overflow: hidden;
+        animation: splashViewportFade 2.50s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         pointer-events: auto;
     }}
-    .renexa-splash-content {{
+
+    /* Centered Branding Group */
+    .renexa-splash-center {{
+        position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 20px;
+        padding: 0 24px;
+        margin-top: -6vh; /* Center-balanced optical elevation above landscape */
+        max-width: 680px;
     }}
-    .renexa-splash-logo {{
+
+    /* 1. Leaf Logo: Small at 0.00-0.35s, scales smoothly 0.35-1.10s */
+    .renexa-splash-logo-wrap {{
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 16px;
-        animation: splashLogoGrow 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        margin-bottom: 14px;
+        animation: splashLogoGrow 2.50s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }}
-    .renexa-splash-brand {{
-        color: {TEXT_PRIMARY};
-        font-size: 2.8rem;
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        margin-bottom: 8px;
-        animation: splashBrandAppear 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
-    }}
-    .renexa-splash-tagline {{
-        color: {TEXT_SECONDARY};
-        font-size: 1.15rem;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-        animation: splashTaglineAppear 0.6s ease-out 0.3s both;
+    .renexa-splash-leaf-svg {{
+        width: 96px;
+        height: 96px;
+        filter: drop-shadow(0 4px 16px rgba(159, 234, 69, 0.25));
     }}
 
-    @keyframes splashContainerFade {{
-        0% {{ opacity: 1; visibility: visible; }}
-        78% {{ opacity: 1; visibility: visible; }}
+    /* 2. ReNexa Brand Title: Appears 0.75-1.25s */
+    .renexa-splash-brand {{
+        color: #F5FFF8;
+        font-size: clamp(2.6rem, 7vw, 3.8rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+        animation: splashBrandAppear 2.50s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }}
+
+    /* 3. Tagline: Appears 1.00-1.40s */
+    .renexa-splash-tagline {{
+        color: #F5FFF8;
+        font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+        margin-bottom: 10px;
+        animation: splashTaglineAppear 2.50s ease-out forwards;
+    }}
+
+    /* 4. Subtitle: Appears 1.15-1.55s */
+    .renexa-splash-subtitle {{
+        color: #A9C3B8;
+        font-size: clamp(0.92rem, 2.4vw, 1.12rem);
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        line-height: 1.45;
+        animation: splashSubtitleAppear 2.50s ease-out forwards;
+    }}
+    .sub-break {{
+        display: inline;
+    }}
+
+    /* Lower Section: Landscape Container: Rises 0.20-1.00s */
+    .renexa-splash-landscape {{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 32vh;
+        min-height: 180px;
+        max-height: 340px;
+        z-index: 5;
+        pointer-events: none;
+        animation: splashLandscapeReveal 2.50s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }}
+    .renexa-landscape-svg {{
+        width: 100%;
+        height: 100%;
+        display: block;
+    }}
+
+    /* Keyframe Choreography (Exact Timeline over 2.50s) */
+
+    /* Viewport: 100% visible 0.00s - 2.20s (88%), then smooth fade out 2.20s - 2.50s */
+    @keyframes splashViewportFade {{
+        0%   {{ opacity: 1; visibility: visible; }}
+        88%  {{ opacity: 1; visibility: visible; }}
         100% {{ opacity: 0; visibility: hidden; pointer-events: none; }}
     }}
 
+    /* 1. Logo: small at 0.00-0.35s (0-14%), scales 0.35-1.10s (14-44%), holds 1.10-2.50s */
     @keyframes splashLogoGrow {{
-        0% {{ transform: scale(0.25); opacity: 0; }}
+        0%   {{ transform: scale(0.25); opacity: 0.95; }}
+        14%  {{ transform: scale(0.25); opacity: 1; }}
+        44%  {{ transform: scale(1.0); opacity: 1; }}
         100% {{ transform: scale(1.0); opacity: 1; }}
     }}
 
+    /* 2. Brand: reveals 0.75-1.25s (30-50%), holds 1.25-2.50s */
     @keyframes splashBrandAppear {{
-        0% {{ transform: scale(0.8) translateY(12px); opacity: 0; }}
+        0%   {{ transform: scale(0.75) translateY(16px); opacity: 0; }}
+        30%  {{ transform: scale(0.75) translateY(16px); opacity: 0; }}
+        50%  {{ transform: scale(1.0) translateY(0); opacity: 1; }}
         100% {{ transform: scale(1.0) translateY(0); opacity: 1; }}
     }}
 
+    /* 3. Tagline: reveals 1.00-1.40s (40-56%), holds 1.40-2.50s */
     @keyframes splashTaglineAppear {{
-        0% {{ transform: translateY(8px); opacity: 0; }}
+        0%   {{ transform: translateY(12px); opacity: 0; }}
+        40%  {{ transform: translateY(12px); opacity: 0; }}
+        56%  {{ transform: translateY(0); opacity: 1; }}
         100% {{ transform: translateY(0); opacity: 1; }}
     }}
 
+    /* 4. Subtitle: reveals 1.15-1.55s (46-62%), holds 1.55-2.50s */
+    @keyframes splashSubtitleAppear {{
+        0%   {{ transform: translateY(10px); opacity: 0; }}
+        46%  {{ transform: translateY(10px); opacity: 0; }}
+        62%  {{ transform: translateY(0); opacity: 1; }}
+        100% {{ transform: translateY(0); opacity: 1; }}
+    }}
+
+    /* 5. Landscape: reveals 0.20-1.00s (8-40%), holds 1.00-2.50s */
+    @keyframes splashLandscapeReveal {{
+        0%   {{ transform: translateY(28px); opacity: 0; }}
+        8%   {{ transform: translateY(28px); opacity: 0; }}
+        40%  {{ transform: translateY(0); opacity: 1; }}
+        100% {{ transform: translateY(0); opacity: 1; }}
+    }}
+
+    /* Responsive Mobile Refinements */
     @media (max-width: 480px) {{
-        .renexa-splash-logo svg {{
-            width: 76px;
-            height: 76px;
+        .renexa-splash-leaf-svg {{
+            width: 82px;
+            height: 82px;
         }}
-        .renexa-splash-brand {{
-            font-size: 2.2rem;
+        .renexa-splash-center {{
+            margin-top: -8vh;
+            padding: 0 16px;
         }}
-        .renexa-splash-tagline {{
-            font-size: 0.95rem;
+        .sub-break {{
+            display: block;
+        }}
+        .renexa-splash-landscape {{
+            height: 28vh;
         }}
     }}
 
+    /* Accessibility / Reduced Motion Mode */
     @media (prefers-reduced-motion: reduce) {{
         .renexa-splash-overlay {{
-            animation: splashReduced 0.2s ease-out forwards !important;
+            animation: splashReducedFade 0.3s ease-out forwards !important;
         }}
-        .renexa-splash-logo, .renexa-splash-brand, .renexa-splash-tagline {{
+        .renexa-splash-logo-wrap,
+        .renexa-splash-brand,
+        .renexa-splash-tagline,
+        .renexa-splash-subtitle,
+        .renexa-splash-landscape {{
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
         }}
-        @keyframes splashReduced {{
-            0% {{ opacity: 1; }}
+        @keyframes splashReducedFade {{
+            0%   {{ opacity: 1; }}
             100% {{ opacity: 0; visibility: hidden; pointer-events: none; }}
         }}
     }}
     </style>
     """
-    st.markdown(splash_html, unsafe_allow_html=True)
+
+
+def show_splash(force: bool = False):
+    """
+    Render reference-matched opening launch screen once per session.
+    Guarantees full-screen display before the Home Dashboard renders.
+    """
+    if not force and st.session_state.get("renexa_splash_shown", False):
+        return
+
+    st.session_state["renexa_splash_shown"] = True
+
+    splash_holder = st.empty()
+    splash_holder.markdown(get_splash_html(), unsafe_allow_html=True)
+    
+    # Hold execution cleanly to allow the browser to complete the 2.50s choreography
+    time.sleep(2.45)
+    splash_holder.empty()
+
+
 

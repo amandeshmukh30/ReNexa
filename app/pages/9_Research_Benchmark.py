@@ -1,3 +1,4 @@
+
 """
 ReNexa — Research Benchmark Page
 ==================================
@@ -67,15 +68,58 @@ st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 # ── Evaluation metrics ────────────────────────────────────────────────────
 st.markdown("### 📊 Benchmark Metrics Summary")
 
-col_b1, col_b2, col_b3 = st.columns(3)
+from services.benchmark_evaluation import evaluate_benchmarks
+
+@st.cache_data
+def get_cached_benchmark_metrics():
+    return evaluate_benchmarks()
+
+metrics = get_cached_benchmark_metrics()
+
+col_b1, col_b2, col_b3, col_b4 = st.columns(4)
 with col_b1:
-    metric_card("Safety Compliance Rate", "100.0%", icon="🛡️")
+    metric_card("Overall Accuracy", f"{metrics['overall_accuracy']*100:.1f}%", icon="🎯")
 with col_b2:
-    metric_card("Constraint Agreement", "100.0%", icon="⚙️")
+    metric_card("Macro Avg F1", f"{metrics['classification_report']['macro avg']['f1-score']*100:.1f}%", icon="📈")
 with col_b3:
-    metric_card("MCDA Ranking Stability", "100.0%", icon="🎯")
+    metric_card("Safety Compliance", "100.0%", icon="🛡️")
+with col_b4:
+    metric_card("Ranking Stability", "100.0%", icon="⚙️")
 
 st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
+# ── Detailed Sklearn Classification Report ───────────────────────────────
+with st.expander("🔬 View Detailed Sklearn Classification Report & Pathway Breakdown", expanded=True):
+    st.markdown("#### Pathway-Level Classification Report (`sklearn.metrics`)")
+    
+    # Format report into DataFrame
+    report_data = []
+    for cls_name, vals in metrics["classification_report"].items():
+        if isinstance(vals, dict):
+            report_data.append({
+                "Target / Metric": cls_name,
+                "Precision": f"{vals['precision']:.2f}",
+                "Recall": f"{vals['recall']:.2f}",
+                "F1-Score": f"{vals['f1-score']:.2f}",
+                "Support (N)": int(vals["support"]) if "support" in vals else "-"
+            })
+    
+    df_report = pd.DataFrame(report_data)
+    st.dataframe(df_report, use_container_width=True, hide_index=True)
+    
+    # Material-level breakdown
+    st.markdown("#### Performance Breakdown by Material Category")
+    mat_rows = []
+    for mat, info in metrics["by_category"].items():
+        mat_rows.append({
+            "Waste Material": mat.capitalize(),
+            "Evaluated Scenarios": info["samples"],
+            "Category Accuracy": f"{info['accuracy']*100:.1f}%"
+        })
+    st.dataframe(pd.DataFrame(mat_rows), use_container_width=True, hide_index=True)
+
+st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
 
 # ── Methodology Card ──────────────────────────────────────────────────────
 st.markdown(

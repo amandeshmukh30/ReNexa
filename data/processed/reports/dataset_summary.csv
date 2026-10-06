@@ -1,0 +1,8 @@
+dataset,path,image_count,annotation_count,class_count,class_names,annotation_format,train_available,validation_available,test_available,attribute_data_available,notes
+asian_waste,E:\ReNexa\data\raw\asian_waste,12627,12630,,,YOLO,True,True,True,,
+mju_waste,E:\ReNexa\data\raw\mju_waste,7425,5,,,Unknown,False,False,False,,
+mmorwad,E:\ReNexa\data\raw\mmorwad,3300,5,,,COCO,False,False,False,,
+taco,E:\ReNexa\data\raw\taco,1500,21,,,COCO,False,False,False,,
+trashnet,E:\ReNexa\data\raw\trashnet,2527,0,,,Unknown,False,False,False,,
+zerowaste-f-final,E:\ReNexa\data\raw\zerowaste-f-final,9006,3,,,COCO / Custom JSON,True,True,True,,
+wadaba,N/A,0,0,0,,N/A,False,False,False,False,Not available / skipped (access/licensing restrictions)

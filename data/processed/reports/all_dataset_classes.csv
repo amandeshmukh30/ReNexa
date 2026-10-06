@@ -1,0 +1,152 @@
+dataset,original_class,count,annotation_type,possible_renexa_class,mapping_status,notes
+trashnet,cardboard,403,folder_name,,PENDING,
+trashnet,glass,501,folder_name,,PENDING,
+trashnet,metal,410,folder_name,,PENDING,
+trashnet,paper,594,folder_name,,PENDING,
+trashnet,plastic,482,folder_name,,PENDING,
+trashnet,trash,137,folder_name,,PENDING,
+taco,Cigarette,667,COCO,,PENDING,supercategory=Cigarette
+taco,Unlabeled litter,517,COCO,,PENDING,supercategory=Unlabeled litter
+taco,Plastic film,451,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Clear plastic bottle,285,COCO,,PENDING,supercategory=Bottle
+taco,Other plastic,273,COCO,,PENDING,supercategory=Other plastic
+taco,Other plastic wrapper,260,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Drink can,229,COCO,,PENDING,supercategory=Can
+taco,Plastic bottle cap,209,COCO,,PENDING,supercategory=Bottle cap
+taco,Plastic straw,157,COCO,,PENDING,supercategory=Straw
+taco,Broken glass,138,COCO,,PENDING,supercategory=Broken glass
+taco,Styrofoam piece,112,COCO,,PENDING,supercategory=Styrofoam piece
+taco,Glass bottle,104,COCO,,PENDING,supercategory=Bottle
+taco,Disposable plastic cup,104,COCO,,PENDING,supercategory=Cup
+taco,Pop tab,99,COCO,,PENDING,supercategory=Pop tab
+taco,Other carton,93,COCO,,PENDING,supercategory=Carton
+taco,Normal paper,82,COCO,,PENDING,supercategory=Paper
+taco,Metal bottle cap,80,COCO,,PENDING,supercategory=Bottle cap
+taco,Plastic lid,77,COCO,,PENDING,supercategory=Lid
+taco,Paper cup,67,COCO,,PENDING,supercategory=Cup
+taco,Corrugated carton,64,COCO,,PENDING,supercategory=Carton
+taco,Aluminium foil,62,COCO,,PENDING,supercategory=Aluminium foil
+taco,Single-use carrier bag,61,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Other plastic bottle,50,COCO,,PENDING,supercategory=Bottle
+taco,Drink carton,45,COCO,,PENDING,supercategory=Carton
+taco,Tissues,42,COCO,,PENDING,supercategory=Paper
+taco,Crisp packet,39,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Disposable food container,38,COCO,,PENDING,supercategory=Plastic container
+taco,Plastic utensils,37,COCO,,PENDING,supercategory=Plastic utensils
+taco,Food Can,34,COCO,,PENDING,supercategory=Can
+taco,Garbage bag,31,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Meal carton,30,COCO,,PENDING,supercategory=Carton
+taco,Rope & strings,29,COCO,,PENDING,supercategory=Rope & strings
+taco,Paper bag,27,COCO,,PENDING,supercategory=Paper bag
+taco,Scrap metal,20,COCO,,PENDING,supercategory=Scrap metal
+taco,Foam food container,15,COCO,,PENDING,supercategory=Plastic container
+taco,Foam cup,13,COCO,,PENDING,supercategory=Cup
+taco,Magazine paper,12,COCO,,PENDING,supercategory=Paper
+taco,Wrapping paper,12,COCO,,PENDING,supercategory=Paper
+taco,Egg carton,11,COCO,,PENDING,supercategory=Carton
+taco,Aerosol,10,COCO,,PENDING,supercategory=Can
+taco,Metal lid,10,COCO,,PENDING,supercategory=Lid
+taco,Spread tub,9,COCO,,PENDING,supercategory=Plastic container
+taco,Food waste,8,COCO,,PENDING,supercategory=Food waste
+taco,Squeezable tube,7,COCO,,PENDING,supercategory=Squeezable tube
+taco,Shoe,7,COCO,,PENDING,supercategory=Shoe
+taco,Glass cup,6,COCO,,PENDING,supercategory=Cup
+taco,Glass jar,6,COCO,,PENDING,supercategory=Glass jar
+taco,Aluminium blister pack,6,COCO,,PENDING,supercategory=Blister pack
+taco,Other plastic container,6,COCO,,PENDING,supercategory=Plastic container
+taco,Toilet tube,5,COCO,,PENDING,supercategory=Carton
+taco,Six pack rings,5,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Paper straw,4,COCO,,PENDING,supercategory=Straw
+taco,Plastic glooves,4,COCO,,PENDING,supercategory=Plastic glooves
+taco,Tupperware,4,COCO,,PENDING,supercategory=Plastic container
+taco,Polypropylene bag,3,COCO,,PENDING,supercategory=Plastic bag & wrapper
+taco,Pizza box,3,COCO,,PENDING,supercategory=Carton
+taco,Battery,2,COCO,,PENDING,supercategory=Battery
+taco,Other plastic cup,2,COCO,,PENDING,supercategory=Cup
+taco,Carded blister pack,1,COCO,,PENDING,supercategory=Blister pack
+mmorwad,Polyethylene Terephthalate (PET),1146,CSV (material),,PENDING,
+mmorwad,High Density Polyethylene (HDPE),488,CSV (material),,PENDING,
+mmorwad,Polypropylene (PP),432,CSV (material),,PENDING,
+mmorwad,Paperboard (PAP),375,CSV (material),,PENDING,
+mmorwad,Aluminium (ALU),167,CSV (material),,PENDING,
+mmorwad,Clear Glass (GL),109,CSV (material),,PENDING,
+mmorwad,Other Plastic (Other),103,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic + Aluminum (C/PAP),96,CSV (material),,PENDING,
+mmorwad,Steel (FE),77,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic (C/PAP),76,CSV (material),,PENDING,
+mmorwad,Cardboard (PAP),61,CSV (material),,PENDING,
+mmorwad,Paper (PAP),38,CSV (material),,PENDING,
+mmorwad,Brown Glass (GL),36,CSV (material),,PENDING,
+mmorwad,Low Density Polyethylene (LDPE),35,CSV (material),,PENDING,
+mmorwad,Plastic + Aluminium (C/PE),32,CSV (material),,PENDING,
+mmorwad,Polystyrene (PS),14,CSV (material),,PENDING,
+mmorwad,Green Glass (GL),10,CSV (material),,PENDING,
+mmorwad,Polyvinyl Chloride (PVC),5,CSV (material),,PENDING,
+mmorwad,Polyethylene Terephthalate (PET),1146,CSV (material),,PENDING,
+mmorwad,High Density Polyethylene (HDPE),488,CSV (material),,PENDING,
+mmorwad,Polypropylene (PP),432,CSV (material),,PENDING,
+mmorwad,Paperboard (PAP),375,CSV (material),,PENDING,
+mmorwad,Aluminium (ALU),167,CSV (material),,PENDING,
+mmorwad,Clear Glass (GL),109,CSV (material),,PENDING,
+mmorwad,Other Plastic (Other),103,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic + Aluminum (C/PAP),96,CSV (material),,PENDING,
+mmorwad,Steel (FE),77,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic (C/PAP),76,CSV (material),,PENDING,
+mmorwad,Cardboard (PAP),61,CSV (material),,PENDING,
+mmorwad,Paper (PAP),38,CSV (material),,PENDING,
+mmorwad,Brown Glass (GL),36,CSV (material),,PENDING,
+mmorwad,Low Density Polyethylene (LDPE),35,CSV (material),,PENDING,
+mmorwad,Plastic + Aluminium (C/PE),32,CSV (material),,PENDING,
+mmorwad,Polystyrene (PS),14,CSV (material),,PENDING,
+mmorwad,Green Glass (GL),10,CSV (material),,PENDING,
+mmorwad,Polyvinyl Chloride (PVC),5,CSV (material),,PENDING,
+mmorwad,Polyethylene Terephthalate (PET),1146,CSV (material),,PENDING,
+mmorwad,High Density Polyethylene (HDPE),488,CSV (material),,PENDING,
+mmorwad,Polypropylene (PP),432,CSV (material),,PENDING,
+mmorwad,Paperboard (PAP),375,CSV (material),,PENDING,
+mmorwad,Aluminium (ALU),167,CSV (material),,PENDING,
+mmorwad,Clear Glass (GL),109,CSV (material),,PENDING,
+mmorwad,Other Plastic (Other),103,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic + Aluminum (C/PAP),96,CSV (material),,PENDING,
+mmorwad,Steel (FE),77,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic (C/PAP),76,CSV (material),,PENDING,
+mmorwad,Cardboard (PAP),61,CSV (material),,PENDING,
+mmorwad,Paper (PAP),38,CSV (material),,PENDING,
+mmorwad,Brown Glass (GL),36,CSV (material),,PENDING,
+mmorwad,Low Density Polyethylene (LDPE),35,CSV (material),,PENDING,
+mmorwad,Plastic + Aluminium (C/PE),32,CSV (material),,PENDING,
+mmorwad,Polystyrene (PS),14,CSV (material),,PENDING,
+mmorwad,Green Glass (GL),10,CSV (material),,PENDING,
+mmorwad,Polyvinyl Chloride (PVC),5,CSV (material),,PENDING,
+mmorwad,Polyethylene Terephthalate (PET),1146,CSV (material),,PENDING,
+mmorwad,High Density Polyethylene (HDPE),488,CSV (material),,PENDING,
+mmorwad,Polypropylene (PP),432,CSV (material),,PENDING,
+mmorwad,Paperboard (PAP),375,CSV (material),,PENDING,
+mmorwad,Aluminium (ALU),167,CSV (material),,PENDING,
+mmorwad,Clear Glass (GL),109,CSV (material),,PENDING,
+mmorwad,Other Plastic (Other),103,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic + Aluminum (C/PAP),96,CSV (material),,PENDING,
+mmorwad,Steel (FE),77,CSV (material),,PENDING,
+mmorwad,Paper/Cardboard + Plastic (C/PAP),76,CSV (material),,PENDING,
+mmorwad,Cardboard (PAP),61,CSV (material),,PENDING,
+mmorwad,Paper (PAP),38,CSV (material),,PENDING,
+mmorwad,Brown Glass (GL),36,CSV (material),,PENDING,
+mmorwad,Low Density Polyethylene (LDPE),35,CSV (material),,PENDING,
+mmorwad,Plastic + Aluminium (C/PE),32,CSV (material),,PENDING,
+mmorwad,Polystyrene (PS),14,CSV (material),,PENDING,
+mmorwad,Green Glass (GL),10,CSV (material),,PENDING,
+mmorwad,Polyvinyl Chloride (PVC),5,CSV (material),,PENDING,
+asian_waste,Plastic,3614,YOLO,,PENDING,
+asian_waste,Garbage Bag,3474,YOLO,,PENDING,
+asian_waste,Glass,3344,YOLO,,PENDING,
+asian_waste,Metal,3304,YOLO,,PENDING,
+asian_waste,Organic,3176,YOLO,,PENDING,
+asian_waste,Animal Waste,3012,YOLO,,PENDING,
+asian_waste,waste,2884,YOLO,,PENDING,
+asian_waste,Paper,2841,YOLO,,PENDING,
+asian_waste,Construction Waste,2010,YOLO,,PENDING,
+zerowaste-f,cardboard,11941,COCO/Detectron2,,PENDING,split=train
+zerowaste-f,soft_plastic,4672,COCO/Detectron2,,PENDING,split=train
+zerowaste-f,rigid_plastic,1130,COCO/Detectron2,,PENDING,split=train
+zerowaste-f,metal,259,COCO/Detectron2,,PENDING,split=train
+mju_waste,waste,2475,segmentation_mask,,PENDING,single-class segmentation (waste vs background)

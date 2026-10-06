@@ -1,0 +1,4 @@
+dataset,split,source_images,accepted_images,rejected_images,duplicate_images,no_valid_boxes,invalid_boxes,remapped_boxes
+zerowaste-f-final,train,3002,2374,0,573,55,0,14699
+zerowaste-f-final,val,572,571,0,0,1,0,3687
+zerowaste-f-final,test,929,899,0,0,30,0,5077

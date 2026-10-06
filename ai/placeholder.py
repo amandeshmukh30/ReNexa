@@ -1,15 +1,5 @@
 """
 AI Module Placeholder — ReNexa
-
-This file is a placeholder for future AI/ML integration.
-No models are loaded or executed in Phase 1.
-
-Future phases will add:
-- Phase 2: Waste recognition (image classification / object detection)
-- Phase 3: Material and condition analysis
-- Phase 4: Recovery knowledge base
-- Phase 5: Constraint-aware feasibility engine
-- Phase 6: Safety validation rules
 """
 
 

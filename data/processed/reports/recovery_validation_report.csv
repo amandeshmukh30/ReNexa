@@ -1,0 +1,7 @@
+file,error,row,column
+recovery_projects_master.csv,missing youtube_url,50 rows,youtube_url
+recovery_projects_master.csv,unverified videos,50 rows,youtube_verified
+recovery_projects_needs_verification.csv,missing youtube_url,50 rows,youtube_url
+recovery_projects_needs_verification.csv,unverified videos,50 rows,youtube_verified
+video_index.csv,missing youtube_url,3 rows,youtube_url
+video_index.csv,unverified videos,3 rows,youtube_verified

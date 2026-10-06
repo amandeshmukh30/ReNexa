@@ -1,0 +1,7 @@
+dataset,train,val,test,split_source
+trashnet,2021,253,253,generated (80/10/10 stratified)
+asian_waste,9964,1327,1336,official
+zerowaste-f,3002,572,929,official
+mmorwad,2583,357,360,official (brand-disjoint)
+mju_waste,1485,248,742,official
+taco,1200,150,150,to be generated (80/10/10)

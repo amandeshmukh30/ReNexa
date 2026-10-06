@@ -5,10 +5,6 @@ Loads the pretrained YOLOv8 waste-classification model and runs
 inference on a single image.  Returns plain Python dicts — no
 Streamlit dependency so this module can also be used in tests.
 
-Usage:
-    from ai.waste_detector import WasteDetector
-    detector = WasteDetector()
-    result   = detector.detect(image)
 """
 
 import os

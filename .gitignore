@@ -40,11 +40,47 @@ desktop.ini
 # ── Jupyter ────────────────────────────────
 .ipynb_checkpoints/
 
-# ── Data (keep structure, ignore large raw datasets)
+# ── Raw Datasets ───────────────────────────
+# Large raw datasets should NOT be uploaded to GitHub
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
-!data/processed/.gitkeep
+
+# ── Processed Datasets ─────────────────────
+# Large processed training datasets should NOT be uploaded
+data/processed/renexa_detection_final/
+data/processed/renexa_detection/
+data/processed/renexa_classification/
+data/processed/renexa_attributes/
+
+# ── Keep Processed Reports ─────────────────
+# Reports and dataset documentation SHOULD be uploaded
+!data/processed/reports/
+!data/processed/reports/**
+
+# ── Keep Dataset Configuration Files ───────
+!data/processed/**/*.yaml
+!data/processed/**/*.yml
+
+# ── Knowledge Base ─────────────────────────
+# ReNexa recovery knowledge and safety rules SHOULD be uploaded
+!data/knowledge/
+!data/knowledge/**
+
+# ── ML Models ──────────────────────────────
+# Trained model files are too large for normal GitHub
+*.pt
+*.pth
+*.onnx
+
+# ── Training Outputs ───────────────────────
+training/runs/
+training/outputs/
+training/checkpoints/
+
+# ── Runtime Generated Data ─────────────────
+# User scan/history/recommendation data is generated locally
+data/runtime/*.json
+data/evaluation/*.json
 
 # ── Streamlit ──────────────────────────────
-# Keep .streamlit/config.toml for cloud theme
+# Keep .streamlit/config.toml

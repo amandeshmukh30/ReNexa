@@ -1,0 +1,11 @@
+,count,unique,top,freq,mean,std,min,25%,50%,75%,max
+dataset,3300,1,mmorwad,3300,,,,,,,
+sample_id,3300.0,,,,1650.5,952.7722707971722,1.0,825.75,1650.5,2475.25,3300.0
+item,3300,721,fanta orangeade 1.5l,19,,,,,,,
+material,3300,18,Polyethylene Terephthalate (PET),1146,,,,,,,
+hue,3300,16,Other,1372,,,,,,,
+cap_present,3300,2,No-N/a,1922,,,,,,,
+label_present,3300,2,No-N/a,2347,,,,,,,
+contamination,3300,2,No-N/a,2457,,,,,,,
+deformation,3300,2,No-N/a,1893,,,,,,,
+split,3300,3,train,2583,,,,,,,

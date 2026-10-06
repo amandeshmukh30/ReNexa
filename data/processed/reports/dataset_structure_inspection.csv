@@ -1,0 +1,7 @@
+dataset,images,annotations,image_formats,annotation_formats,detected_formats,splits
+asian_waste,12627,12630,{'.jpg': 12627},"{'.yaml': 1, '.txt': 12629}",YOLO-like TXT (18 sample files),test=1336; train=9964; valid=1327
+mju_waste,7425,5,{'.png': 7425},{'.txt': 5},"Segmentation/mask directories: SegmentationClass, Segmentation",none
+mmorwad,3300,5,{'.png': 3300},"{'.json': 1, '.csv': 4}",COCO JSON (1 sample files),none
+taco,1500,21,{'.jpg': 1500},"{'.txt': 1, '.json': 16, '.csv': 4}",COCO JSON (16 sample files),none
+trashnet,2527,0,{'.jpg': 2527},{},Unknown / needs manual inspection,none
+zerowaste-f-final,9006,3,{'.png': 9006},{'.json': 3},COCO JSON (3 sample files),test=1858; train=6004; val=1144

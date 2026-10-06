@@ -1,0 +1,56 @@
+Total unresolved REVIEW classes: 54
+
+taco | Plastic lid
+taco | Paper cup
+taco | Corrugated carton
+taco | Aluminium foil
+taco | Single-use carrier bag
+taco | Other plastic bottle
+taco | Drink carton
+taco | Tissues
+taco | Crisp packet
+taco | Disposable food container
+taco | Plastic utensils
+taco | Food Can
+taco | Garbage bag
+taco | Meal carton
+taco | Rope & strings
+taco | Paper bag
+taco | Scrap metal
+taco | Foam food container
+taco | Foam cup
+taco | Magazine paper
+taco | Wrapping paper
+taco | Egg carton
+taco | Aerosol
+taco | Metal lid
+taco | Spread tub
+taco | Squeezable tube
+taco | Shoe
+taco | Glass cup
+taco | Glass jar
+taco | Aluminium blister pack
+taco | Other plastic container
+taco | Toilet tube
+taco | Six pack rings
+taco | Paper straw
+taco | Plastic glooves
+taco | Tupperware
+taco | Polypropylene bag
+taco | Pizza box
+taco | Battery
+taco | Other plastic cup
+taco | Carded blister pack
+mmorwad | Paper/Cardboard + Plastic + Aluminum (C/PAP)
+mmorwad | Paper/Cardboard + Plastic (C/PAP)
+mmorwad | Plastic + Aluminium (C/PE)
+mmorwad | Paper/Cardboard + Plastic + Aluminum (C/PAP)
+mmorwad | Paper/Cardboard + Plastic (C/PAP)
+mmorwad | Plastic + Aluminium (C/PE)
+mmorwad | Paper/Cardboard + Plastic + Aluminum (C/PAP)
+mmorwad | Paper/Cardboard + Plastic (C/PAP)
+mmorwad | Plastic + Aluminium (C/PE)
+mmorwad | Paper/Cardboard + Plastic + Aluminum (C/PAP)
+mmorwad | Paper/Cardboard + Plastic (C/PAP)
+mmorwad | Plastic + Aluminium (C/PE)
+asian_waste | waste
