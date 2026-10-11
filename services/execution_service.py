@@ -14,7 +14,7 @@ Guiding Principles:
 - No Fabrication: If steps or tutorial references are missing, returns explicit data quality notices without inventing instructions.
 """
 
-from services.recovery_service import load_recovery_pathways
+from services.recovery_service import load_recovery_pathways, get_tutorials_for_pathway
 from services.eligibility_service import evaluate_pathway_eligibility
 
 
@@ -127,6 +127,7 @@ def get_execution_guide(pathway_or_id, user_constraints=None, waste_profile=None
         pathway=pathway,
         user_constraints=user_constraints,
         waste_profile=waste_profile,
+        csv_path=csv_path,
     )
 
     safety_status = eligibility_result.get("safety_status", "ALLOW")
@@ -172,6 +173,14 @@ def get_execution_guide(pathway_or_id, user_constraints=None, waste_profile=None
     has_valid_source = bool(source_str and source_str.lower() not in ("none", "unknown", ""))
     tutorial_ref = source_str if has_valid_source else "No verified tutorial reference is available."
 
+    # Query matched verified video tutorials
+    matched_tutorials = get_tutorials_for_pathway(pathway, verified_only=True)
+    verified_tutorials = [
+        t for t in matched_tutorials
+        if t.get("youtube_verified") == "Yes" and t.get("youtube_url") and t.get("youtube_url").startswith("http")
+    ]
+    primary_tutorial = verified_tutorials[0] if verified_tutorials else None
+
     return {
         "pathway_id": pathway.get("pathway_id", "UNKNOWN"),
         "title": pathway.get("title", "Unnamed Pathway"),
@@ -200,6 +209,9 @@ def get_execution_guide(pathway_or_id, user_constraints=None, waste_profile=None
         "source": source_str,
         "verification_status": str(pathway.get("verification_status", "prototype")),
         "last_reviewed": str(pathway.get("last_reviewed", "Unknown")),
+        "tutorials": matched_tutorials,
+        "verified_tutorials": verified_tutorials,
+        "primary_tutorial": primary_tutorial,
         "tutorial_available": has_valid_source,
         "tutorial_reference": tutorial_ref,
     }

@@ -203,17 +203,17 @@ def evaluate_constraints(pathway, user_constraints=None, waste_profile=None):
     # ── 8. Waste Condition & Contamination Constraints ──────────────────────
     if waste_profile and isinstance(waste_profile, dict):
         cond_req = str(pathway.get("condition_requirement", "Any")).strip()
-        waste_cond = str(waste_profile.get("condition", "Unknown")).strip().capitalize()
-        waste_contam = str(waste_profile.get("contamination", "Unknown")).strip().capitalize()
+        waste_cond = str(waste_profile.get("condition", "Unknown")).strip()
+        waste_contam = str(waste_profile.get("contamination", "Unknown")).strip()
 
-        # Check condition requirement
+        # Check condition requirement (case-insensitive)
         if cond_req.lower() != "any":
             allowed_conditions = [c.strip().lower() for c in cond_req.split(",")]
             if waste_cond.lower() not in ("unknown", "") and waste_cond.lower() not in allowed_conditions:
                 reasons.append(f"Condition requirement not met: pathway requires '{cond_req}', but item condition is '{waste_cond}'")
 
-        # Heavy contamination blocks direct clean reuse
-        if waste_contam == "Heavily Contaminated" and pathway.get("pathway_type") in ("reuse", "repair"):
+        # Heavy contamination blocks direct clean reuse and repair
+        if waste_contam.lower() == "heavily contaminated" and pathway.get("pathway_type") in ("reuse", "repair"):
             reasons.append("Contamination mismatch: item is heavily contaminated for direct reuse/repair")
 
     # Final status determination

@@ -32,3 +32,10 @@ SAF-BIO-001,biological,compost,ALLOW,Safe composting practice,Layering vegetable
 SAF-BIO-002,biological,dispose,ALLOW,Safe wet waste segregation,Segregating kitchen food scraps into green bins is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
 SAF-TRA-001,trash,dispose,ALLOW,Safe residual waste bagging,Bagging non-recyclable refuse for municipal collection is safe.,Municipal Solid Waste Guidelines,verified,2026-10-02
 SAF-GEN-001,any,chemical_treatment,BLOCK,Prohibited toxic chemical processing,Do not perform acid leaching solvent extraction or open burning on any household waste.,EPA Hazardous Waste Safety Standards,verified,2026-10-02
+SAF-OTH-001,other,cutting,WARN,Sharp tool safety precaution,Use utility knives with a cutting mat when slicing cork or trimming items.,OSHA Workshop Safety Guidelines,verified,2026-10-10
+SAF-OTH-002,other,repair,WARN,Adhesive ventilation,Use ceramic and household contact adhesives in well-ventilated areas.,OSHA Solvent and Adhesive Safety,verified,2026-10-10
+SAF-OTH-003,other,reuse,ALLOW,Safe miscellaneous reuse,Using clean inert household objects for storage or decor is safe.,Municipal Solid Waste Guidelines,verified,2026-10-10
+SAF-OTH-004,other,upcycle,ALLOW,Safe household crafting,Decorating and assembling cork or household craft items is safe.,Established DIY Safety Manual,verified,2026-10-10
+SAF-OTH-005,other,recycle,ALLOW,Safe material sorting,Sorting non-hazardous dry waste into designated recovery channels is safe.,Municipal Recycling Guidelines,verified,2026-10-10
+SAF-BIO-003,biological,upcycle,ALLOW,Safe eco-enzyme fermentation,Burp fermentation containers daily during first month to release pressure buildup safely.,Zero Waste Home Safety Guidelines,verified,2026-10-10
+SAF-BIO-004,biological,reuse,ALLOW,Safe organic soil conditioning,Applying dried spent coffee grounds or tea leaves to garden soil is safe.,EPA Composting at Home Guidelines,verified,2026-10-10

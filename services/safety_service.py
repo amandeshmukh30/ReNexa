@@ -18,11 +18,23 @@ Design Principles:
 import csv
 import os
 
-DEFAULT_SAFETY_CSV = os.path.abspath(
+# Paths to the safety rules dataset (check knowledge dir first, then fallback to data dir)
+_KNOWLEDGE_SAFETY_CSV = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "data", "knowledge", "safety_rules.csv")
+)
+_FALLBACK_SAFETY_CSV = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "data", "safety_rules.csv")
+)
+DEFAULT_SAFETY_CSV = (
+    _KNOWLEDGE_SAFETY_CSV if os.path.isfile(_KNOWLEDGE_SAFETY_CSV) else _FALLBACK_SAFETY_CSV
 )
 
 GLASS_VARIANTS = {"brown-glass", "green-glass", "white-glass", "glass"}
+MATERIAL_ALIASES = {
+    "organic": "biological",
+    "bio": "biological",
+    "food": "biological",
+}
 
 
 def normalize_material(material):
@@ -32,6 +44,8 @@ def normalize_material(material):
     mat = str(material).strip().lower()
     if mat in GLASS_VARIANTS:
         return "glass"
+    if mat in MATERIAL_ALIASES:
+        return MATERIAL_ALIASES[mat]
     return mat
 
 
@@ -143,6 +157,44 @@ def evaluate_safety(pathway, waste_profile=None, safety_preference=None, csv_pat
                     warnings.append(f"[{rule['rule_id']}] {rule['warning']}")
 
     # ── Pathway-level inherent safety check ──────────────────────────────────
+    # Conservative check for damaged glass used in household recovery.
+    p_condition = (
+        str(waste_profile.get("condition") or "").strip().lower()
+        if isinstance(waste_profile, dict)
+        else ""
+    )
+
+    if (
+        p_mat == "glass"
+        and p_type in ("reuse", "upcycle", "repair")
+        and any(term in p_condition for term in (
+            "chip", "crack", "broken", "shatter", "damaged"
+        ))
+    ):
+        final_status = "BLOCK"
+        reasons.append(
+            "[SAF-GLA-DAMAGED] Chipped, cracked, broken, or damaged glass "
+            "must not be used for household reuse or upcycling. "
+            "Choose an appropriate glass collection or recycling option."
+        )
+
+    # Block the known risky household method: punching tin with a hammer and nail.
+    metal_method = f"{p_steps} {p_tools}"
+    if (
+        p_mat == "metal"
+        and p_type == "upcycle"
+        and "punch" in metal_method
+        and "hole" in metal_method
+        and "hammer" in metal_method
+        and "nail" in metal_method
+    ):
+        final_status = "BLOCK"
+        reasons.append(
+            "[SAF-MET-HOLE-PUNCH] Hammer-and-nail hole punching can leave "
+            "sharp metal burrs. Do not recommend this household method; "
+            "choose a safer ready-made container or recycling alternative."
+        )
+
     # Check if pathway explicitly declares High risk or has battery DIY
     if p_mat == "battery" and p_type in ("repair", "upcycle", "reuse"):
         final_status = "BLOCK"
@@ -153,7 +205,7 @@ def evaluate_safety(pathway, waste_profile=None, safety_preference=None, csv_pat
         warnings.append("[SAFETY-HIGH-RISK] Pathway involves high-hazard operations. Proceed only with certified protective equipment.")
 
     # ── User Safety Preference Check ─────────────────────────────────────────
-    if safety_preference == "Only low-risk options" and p_safety_level in ("Medium", "High") and final_status != "BLOCK":
+    if safety_preference == "Only low-risk options" and p_safety_level in ("Medium", "High"):
         warnings.append(f"[PREFERENCE-NOTICE] Option has '{p_safety_level}' safety level while your preference is set to 'Only low-risk options'.")
 
     return {

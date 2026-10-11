@@ -411,7 +411,7 @@ def get_ranked_pathways(eligibility_records, user_constraints=None, waste_profil
     return ranked_results
 
 
-def get_ranked_recommendations_for_profile(waste_profile, user_constraints=None, top_k=3):
+def get_ranked_recommendations_for_profile(waste_profile, user_constraints=None, top_k=3, csv_path=None):
     """
     End-to-end convenience function:
     Profile -> Candidate Pathways -> Phase 5 Eligibility -> MCDA Ranking -> Top-K.
@@ -420,6 +420,7 @@ def get_ranked_recommendations_for_profile(waste_profile, user_constraints=None,
         waste_profile:    structured waste profile dictionary.
         user_constraints: user constraint dictionary.
         top_k:            number of recommendations to return (default 3).
+        csv_path:         optional custom CSV path.
 
     Returns:
         list[dict]: Ranked top-K recommendations.
@@ -431,6 +432,7 @@ def get_ranked_recommendations_for_profile(waste_profile, user_constraints=None,
     eligibility_records = get_eligible_pathways_for_profile(
         waste_profile=waste_profile,
         user_constraints=user_constraints,
+        csv_path=csv_path,
     )
 
     # Run Phase 6 MCDA Ranking

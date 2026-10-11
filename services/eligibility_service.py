@@ -20,7 +20,7 @@ from services.constraint_service import evaluate_constraints
 from services.recovery_service import get_recovery_pathways
 
 
-def evaluate_pathway_eligibility(pathway, user_constraints=None, waste_profile=None):
+def evaluate_pathway_eligibility(pathway, user_constraints=None, waste_profile=None, csv_path=None):
     """
     Evaluate the end-to-end recovery eligibility of a single pathway.
 
@@ -28,6 +28,7 @@ def evaluate_pathway_eligibility(pathway, user_constraints=None, waste_profile=N
         pathway:          Dict containing pathway metadata.
         user_constraints: Dict of user-provided constraints.
         waste_profile:    Dict containing structured waste profile.
+        csv_path:         Optional custom path to CSV files.
 
     Returns:
         dict:
@@ -66,6 +67,7 @@ def evaluate_pathway_eligibility(pathway, user_constraints=None, waste_profile=N
         pathway=pathway,
         waste_profile=waste_profile,
         safety_preference=safety_pref,
+        csv_path=csv_path,
     )
 
     safety_status = safety_result["safety_status"]
@@ -114,7 +116,7 @@ def evaluate_pathway_eligibility(pathway, user_constraints=None, waste_profile=N
     }
 
 
-def evaluate_all_pathways(pathways, user_constraints=None, waste_profile=None):
+def evaluate_all_pathways(pathways, user_constraints=None, waste_profile=None, csv_path=None):
     """
     Evaluate eligibility for a list of candidate pathways.
 
@@ -128,18 +130,20 @@ def evaluate_all_pathways(pathways, user_constraints=None, waste_profile=None):
             pathway=p,
             user_constraints=user_constraints,
             waste_profile=waste_profile,
+            csv_path=csv_path,
         )
         for p in pathways
     ]
 
 
-def get_eligible_pathways_for_profile(waste_profile, user_constraints=None):
+def get_eligible_pathways_for_profile(waste_profile, user_constraints=None, csv_path=None):
     """
     Find and evaluate all candidate pathways matching a waste profile.
 
     Args:
         waste_profile: Structured waste profile dict.
         user_constraints: User constraints dict.
+        csv_path: Optional custom path to CSV.
 
     Returns:
         list[dict]: Evaluated eligibility records for all candidate pathways.
@@ -148,9 +152,10 @@ def get_eligible_pathways_for_profile(waste_profile, user_constraints=None):
         return []
 
     material = waste_profile.get("material")
-    candidate_pathways = get_recovery_pathways(material=material)
+    candidate_pathways = get_recovery_pathways(material=material, csv_path=csv_path)
     return evaluate_all_pathways(
         pathways=candidate_pathways,
         user_constraints=user_constraints,
         waste_profile=waste_profile,
+        csv_path=csv_path,
     )

@@ -15,13 +15,12 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 def test_required_runtime_data_files_exist():
     """Verify that all core runtime CSV and JSON template data files exist."""
-    required_files = [
-        os.path.join(PROJECT_ROOT, "data", "recovery_pathways.csv"),
-        os.path.join(PROJECT_ROOT, "data", "safety_rules.csv"),
-        os.path.join(PROJECT_ROOT, "data", "outcome_feedback.json"),
-    ]
-    for path in required_files:
-        assert os.path.isfile(path), f"Critical runtime asset missing: {path}"
+    has_pathways = os.path.isfile(os.path.join(PROJECT_ROOT, "data", "knowledge", "recovery_pathways.csv")) or os.path.isfile(os.path.join(PROJECT_ROOT, "data", "recovery_pathways.csv"))
+    has_safety = os.path.isfile(os.path.join(PROJECT_ROOT, "data", "knowledge", "safety_rules.csv")) or os.path.isfile(os.path.join(PROJECT_ROOT, "data", "safety_rules.csv"))
+    has_feedback = os.path.isfile(os.path.join(PROJECT_ROOT, "data", "outcome_feedback.json"))
+    assert has_pathways, "Critical runtime asset missing: recovery_pathways.csv"
+    assert has_safety, "Critical runtime asset missing: safety_rules.csv"
+    assert has_feedback, "Critical runtime asset missing: outcome_feedback.json"
 
 
 def test_model_file_exists_and_path_is_repository_relative():

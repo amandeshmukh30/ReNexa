@@ -7,6 +7,7 @@ streamlit>=1.35.0
 
 # Computer Vision / YOLO
 ultralytics>=8.4.174
+torch>=2.0.0
 pillow>=10.0.0
 
 # Data Processing

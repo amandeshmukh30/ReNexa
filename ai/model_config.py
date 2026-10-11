@@ -1,54 +1,69 @@
+
 """
-ReNexa — AI Model Configuration
+ReNexa - AI Model Configuration
 ================================
-Central place for model paths, detection settings, and profile categories.
-All AI modules import from here so values are not repeated.
+Central configuration for model paths, detection settings,
+material options, and waste profile categories.
 """
 
 import os
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-# ── Pretrained YOLO waste-classification model ────────────────────────────
-# 12 classes: battery, biological, brown-glass, cardboard, clothes,
-#             green-glass, metal, paper, plastic, shoes, trash, white-glass
-
-REPO_MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "yolov8n-waste-12cls-best.pt")
-CACHE_MODEL_PATH = os.path.expanduser(
-    os.path.join(
-        "~",
-        ".cache",
-        "huggingface",
-        "hub",
-        "models--kendrickfff--waste-classification-yolov8-ken",
-        "snapshots",
-        "0bf64a69712abcc9f80e4697a4fd90028a4ba74e",
-        "yolov8n-waste-12cls-best.pt",
-    )
+# Project root
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")
 )
 
-# Resolve model path dynamically in order of preference:
-# 1. Environment variable override
-# 2. Repository-relative path (`models/yolov8n-waste-12cls-best.pt`)
-# 3. Local HuggingFace cache snapshot
-# 4. Fallback to repo model path
-if os.environ.get("RENEXA_MODEL_PATH") and os.path.isfile(os.environ["RENEXA_MODEL_PATH"]):
-    MODEL_PATH = os.environ["RENEXA_MODEL_PATH"]
-elif os.path.isfile(REPO_MODEL_PATH):
-    MODEL_PATH = REPO_MODEL_PATH
-elif os.path.isfile(CACHE_MODEL_PATH):
-    MODEL_PATH = CACHE_MODEL_PATH
+# --------------------------------------------------
+# Trained ReNexa YOLO26s detection model
+# --------------------------------------------------
+
+# Model included for deployment on GitHub / Streamlit Cloud
+DEPLOYMENT_MODEL_PATH = os.path.join(
+    PROJECT_ROOT,
+    "models",
+    "deployment",
+    "best.pt",
+)
+
+# Original model location used during local training
+REPO_MODEL_PATH = os.path.join(
+    PROJECT_ROOT,
+    "training",
+    "runs",
+    "yolo26s_final",
+    "weights",
+    "best.pt",
+)
+
+# Optional environment variable override
+ENV_MODEL_PATH = os.environ.get("RENEXA_MODEL_PATH")
+
+if ENV_MODEL_PATH and os.path.isfile(ENV_MODEL_PATH):
+    MODEL_PATH = ENV_MODEL_PATH
+elif os.path.isfile(DEPLOYMENT_MODEL_PATH):
+    MODEL_PATH = DEPLOYMENT_MODEL_PATH
 else:
     MODEL_PATH = REPO_MODEL_PATH
 
-# ── Detection settings ────────────────────────────────────────────────────
-# Minimum confidence for a detection to be kept.
-CONFIDENCE_THRESHOLD = 0.25
+# --------------------------------------------------
+# Detection settings
+# --------------------------------------------------
 
-# ── Glass label normalisation ─────────────────────────────────────────────
-GLASS_LABELS = {"brown-glass", "green-glass", "white-glass"}
+# Minimum confidence required to keep a detection
+CONFIDENCE_THRESHOLD = 0.40
 
-# ── All material choices the user can pick from ──────────────────────────
+# Glass labels that should be normalised to "glass"
+GLASS_LABELS = {
+    "brown-glass",
+    "green-glass",
+    "white-glass",
+}
+
+# --------------------------------------------------
+# Material options for user confirmation/correction
+# These are not limited to the model's 7 classes.
+# --------------------------------------------------
+
 MATERIAL_OPTIONS = [
     "battery",
     "biological",
@@ -62,7 +77,10 @@ MATERIAL_OPTIONS = [
     "trash",
 ]
 
-# ── Standard Condition & Contamination Categories ─────────────────────────
+# --------------------------------------------------
+# Standard condition categories
+# --------------------------------------------------
+
 ALLOWED_CONDITIONS = [
     "Good",
     "Used",
@@ -70,6 +88,10 @@ ALLOWED_CONDITIONS = [
     "Heavily Damaged",
     "Unknown",
 ]
+
+# --------------------------------------------------
+# Standard contamination categories
+# --------------------------------------------------
 
 ALLOWED_CONTAMINATIONS = [
     "Clean",

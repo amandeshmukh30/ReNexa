@@ -1,4 +1,4 @@
-# ── Python ──────────────────────────────────
+# â”€â”€ Python â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 __pycache__/
 *.py[cod]
 *$py.class
@@ -9,78 +9,93 @@ build/
 eggs/
 *.egg
 
-# ── Virtual Environment ────────────────────
+# â”€â”€ Virtual Environment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 venv/
 env/
 .venv/
 
-# ── Environment Variables / Secrets ────────
+# â”€â”€ Environment Variables / Secrets â”€â”€â”€â”€â”€â”€â”€â”€
 .env
 .env.*
 !.env.example
 .streamlit/secrets.toml
 
-# ── Test Caches & Artifacts ────────────────
+# â”€â”€ Test Caches & Artifacts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .pytest_cache/
 runs/
 scratch/
 
-# ── IDE ────────────────────────────────────
+# â”€â”€ IDE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# ── OS ─────────────────────────────────────
+# â”€â”€ OS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ── Jupyter ────────────────────────────────
+# â”€â”€ Jupyter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ipynb_checkpoints/
 
-# ── Raw Datasets ───────────────────────────
+# â”€â”€ Raw Datasets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Large raw datasets should NOT be uploaded to GitHub
 data/raw/*
 !data/raw/.gitkeep
 
-# ── Processed Datasets ─────────────────────
+# â”€â”€ Processed Datasets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Large processed training datasets should NOT be uploaded
 data/processed/renexa_detection_final/
 data/processed/renexa_detection/
 data/processed/renexa_classification/
 data/processed/renexa_attributes/
 
-# ── Keep Processed Reports ─────────────────
+# â”€â”€ Keep Processed Reports â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Reports and dataset documentation SHOULD be uploaded
 !data/processed/reports/
 !data/processed/reports/**
 
-# ── Keep Dataset Configuration Files ───────
+# â”€â”€ Keep Dataset Configuration Files â”€â”€â”€â”€â”€â”€â”€
 !data/processed/**/*.yaml
 !data/processed/**/*.yml
 
-# ── Knowledge Base ─────────────────────────
+# â”€â”€ Knowledge Base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # ReNexa recovery knowledge and safety rules SHOULD be uploaded
 !data/knowledge/
 !data/knowledge/**
 
-# ── ML Models ──────────────────────────────
+
+# â”€â”€ ML Models â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Trained model files are too large for normal GitHub
 *.pt
 *.pth
 *.onnx
 
-# ── Training Outputs ───────────────────────
+# Include only the final deployment model
+!models/
+!models/deployment/
+!models/deployment/best.pt
+
+
+# â”€â”€ Training Outputs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 training/runs/
 training/outputs/
 training/checkpoints/
 
-# ── Runtime Generated Data ─────────────────
+# â”€â”€ Runtime Generated Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # User scan/history/recommendation data is generated locally
 data/runtime/*.json
 data/evaluation/*.json
 
-# ── Streamlit ──────────────────────────────
+# â”€â”€ Streamlit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Keep .streamlit/config.toml
+# Local runtime records — preserve locally, do not commit
+/data/scans.json
+/data/outcome_feedback.json
+/data/recommendations.json
+/data/waste_profiles.json
+
+# Local backups
+/local_backup/

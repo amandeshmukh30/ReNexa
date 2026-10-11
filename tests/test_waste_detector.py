@@ -67,8 +67,19 @@ def test_model_loads(detector):
 
 
 def test_model_has_class_names(detector):
-    """The loaded model should report 12 class names."""
-    assert len(detector.class_names) == 12
+    """The loaded YOLO26s model should report exactly 7 trained classes with exact IDs."""
+    expected_classes = {
+        0: "cardboard",
+        1: "glass",
+        2: "metal",
+        3: "organic",
+        4: "other",
+        5: "paper",
+        6: "plastic",
+    }
+    assert len(detector.class_names) == 7
+    assert detector.model.names == expected_classes
+
 
 
 def test_model_path_exists():

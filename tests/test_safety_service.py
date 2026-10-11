@@ -138,3 +138,43 @@ def test_safety_preference_flagging():
     }
     result = evaluate_safety(pathway, safety_preference="Only low-risk options")
     assert any("safety level" in w.lower() or "preference" in w.lower() for w in result["warnings"])
+
+def test_chipped_glass_is_blocked_for_household_upcycling():
+    """Chipped glass must not be recommended for household upcycling."""
+    pathway = {
+        "pathway_id": "TEST-GLA-CHIPPED",
+        "input_material": "glass",
+        "pathway_type": "upcycle",
+        "title": "Glass Candle Holder or Planter",
+        "tools": "Towel, small pebbles",
+        "steps": "Clean glass jar and add pebbles",
+        "safety_level": "Low",
+    }
+    profile = {
+        "material": "glass",
+        "condition": "Chipped",
+        "contamination": "Clean",
+    }
+
+    result = evaluate_safety(pathway, waste_profile=profile)
+
+    assert result["safety_status"] == "BLOCK"
+    assert len(result["reasons"]) > 0
+
+
+def test_metal_tin_hole_punching_is_blocked():
+    """DIY hole punching in a metal tin must be blocked due to sharp-burr risk."""
+    pathway = {
+        "pathway_id": "TEST-MET-HOLE",
+        "input_material": "metal",
+        "pathway_type": "upcycle",
+        "title": "Hanging Herb Planter",
+        "tools": "Hammer, nail, twine",
+        "steps": "Punch drainage holes in a metal tin with a hammer and nail",
+        "safety_level": "Medium",
+    }
+
+    result = evaluate_safety(pathway)
+
+    assert result["safety_status"] == "BLOCK"
+    assert len(result["reasons"]) > 0

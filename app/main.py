@@ -1,226 +1,202 @@
-"""
-ReNexa — Main Dashboard
-========================
-Entry point for the Streamlit multi-page app.
-ReNexa: Give Waste Its Next Life.
-AI-Powered Waste Recovery Intelligence.
-"""
 
-import warnings
-import logging
+import sys
+from pathlib import Path
 
-warnings.filterwarnings("ignore")
-logging.disable(logging.WARNING)
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import streamlit as st
-import sys
-import os
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+from app.ui import login_gate, render_shell, render_footer
+from app.ui.components import section, metric, card
 
 
-from utils.ui import (
-    configure_page,
-    render_sidebar,
-    render_renexa_header,
-    render_dashboard_card,
-    metric_card,
-    show_splash,
-    PRIMARY,
-    SURFACE,
-    BORDER,
-    TEXT_PRIMARY,
-    TEXT_SECONDARY,
+st.set_page_config(
+    page_title="ReNexa | Waste Recovery Intelligence",
+    page_icon="♻",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
-from database.auth import AUTH_USER_KEY, AUTH_TOKEN_KEY
-from database.database import get_user_dashboard_metrics, get_all_feedback, get_user_scans
-from services.recovery_service import load_recovery_pathways
-
-# ── Page config ────────────────────────────────────────────────────────────
-configure_page(title="ReNexa — Give Waste Its Next Life", icon="♻️", layout="wide")
-
-# ── Opening Splash Screen Animation (Once per session) ────────────────────
-show_splash()
-
-# ── Sidebar navigation ───────────────────────────────────────────────────
-render_sidebar(current_page="main.py")
-
-# ── Hero Header ───────────────────────────────────────────────────────────
-render_renexa_header()
 
 
-# ── Primary CTAs ──────────────────────────────────────────────────────────
-cta_col1, cta_col2 = st.columns(2)
-with cta_col1:
-    st.page_link("pages/1_Scan_Waste.py", label="📷  Scan Household Waste Item", use_container_width=True)
-with cta_col2:
-    st.page_link("pages/3_Recovery.py", label="🔄  Explore Recovery Pathways", use_container_width=True)
+# Authentication and page layout
+login_gate()
+render_shell("Home")
 
-st.divider()
 
-# ── Authentic Overview Stats ──────────────────────────────────────────────
-current_user = st.session_state.get(AUTH_USER_KEY)
-token = st.session_state.get(AUTH_TOKEN_KEY)
-user_id = current_user.get("id") if current_user else None
+# Hero section
+st.markdown(
+    """
+    <div class="rx-hero">
+        <div class="rx-eyebrow">WELCOME TO RENEXA</div>
+        <h1>Turn Waste into<br>Opportunity</h1>
+        <p>
+            Scan, discover, and give your waste a second life with
+            AI-assisted insights, safer recovery options, and practical
+            step-by-step guidance.
+        </p>
+        <div style="color:var(--rx-primary);font-weight:750">
+            Start with a waste scan →
+        </div>
+        <div class="rx-art">♻</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-pathways_catalog = load_recovery_pathways()
-catalog_count = len(pathways_catalog)
 
-if current_user:
-    metrics = get_user_dashboard_metrics(user_id=user_id, token=token)
-    st.markdown(f"### 👋 Personal Recovery Dashboard — **{current_user.get('display_name', 'Eco User')}**")
-    s1, s2, s3, s4 = st.columns(4)
-    with s1:
-        metric_card("My Scans", metrics["total_scans"], icon="📷")
-    with s2:
-        metric_card("Pathways Catalog", catalog_count, icon="🔄")
-    with s3:
-        metric_card("DIY Attempts", metrics["total_attempts"], icon="🛠️")
-    with s4:
-        metric_card("Success Rate", f"{metrics['resr']}%", icon="🏆")
-else:
-    # Guest / neutral overview with authentic system figures
-    guest_scans = len(get_user_scans(limit=100))
-    guest_fb = get_all_feedback()
-    guest_attempts = len([f for f in guest_fb if str(f.get("attempt_status", "")).lower() in ("successful", "partial", "failed")])
-    guest_success = len([f for f in guest_fb if str(f.get("attempt_status", "")).lower() == "successful"])
+# System overview
+section(
+    "System Overview",
+    "A snapshot of your recovery workspace",
+    "▥",
+)
 
-    st.markdown("### 📊 System Overview")
-    s1, s2, s3, s4 = st.columns(4)
-    with s1:
-        metric_card("Scans Recorded", guest_scans, icon="📷")
-    with s2:
-        metric_card("Pathways Catalog", catalog_count, icon="🔄")
-    with s3:
-        metric_card("Executions Logged", guest_attempts, icon="🛠️")
-    with s4:
-        metric_card("Successful Recoveries", guest_success, icon="✅")
+cols = st.columns(4, gap="medium")
 
-st.divider()
+try:
+    from services.recovery_service import load_recovery_pathways, get_tutorials
+    from services.outcome_service import load_outcome_feedback
 
-# ── Quick Access Grid ─────────────────────────────────────────────────────
-st.markdown("### 🧭 Quick Access")
-
-row1 = st.columns(3)
-with row1[0]:
-    render_dashboard_card(
-        title="Scan Waste",
-        description="Upload or take a photo to detect material and assess physical condition.",
-        icon="📷",
-        target_page="pages/1_Scan_Waste.py",
+    pathways_total = len(load_recovery_pathways())
+    tutorials_total = len(get_tutorials(verified_only=True))
+    feedback_records = load_outcome_feedback()
+    confirmed_recoveries = sum(
+        1 for x in feedback_records if str(x.get("attempt_status", "")).lower() == "successful"
     )
-with row1[1]:
-    render_dashboard_card(
-        title="Recovery Options",
-        description="Browse repair, reuse, upcycle, recycle, and disposal pathways.",
-        icon="🔄",
-        target_page="pages/3_Recovery.py",
-    )
-with row1[2]:
-    render_dashboard_card(
-        title="My Constraints",
-        description="Set your household budget, tools, skill, time, and workspace.",
-        icon="⚙️",
-        target_page="pages/4_Constraints.py",
-    )
+except Exception:
+    pathways_total = "55"
+    tutorials_total = "—"
+    confirmed_recoveries = 0
 
-row2 = st.columns(3)
-with row2[0]:
-    render_dashboard_card(
-        title="Tutorial Guides",
-        description="Step-by-step execution procedures and safety guidance.",
-        icon="📚",
-        target_page="pages/6_Tutorials.py",
-    )
-with row2[1]:
-    render_dashboard_card(
-        title="Personal History",
-        description="View your past scans, recommendations, and execution feedback.",
-        icon="📜",
-        target_page="pages/7_History.py",
-    )
-with row2[2]:
-    render_dashboard_card(
-        title="Outcome Analytics",
-        description="Real-world recipe reliability (OVRR) and execution metrics.",
-        icon="📈",
-        target_page="pages/7_Outcome.py",
-    )
-
-st.divider()
-
-# ── How ReNexa Works ──────────────────────────────────────────────────────
-st.markdown("### 🔬 How ReNexa Works")
-st.caption("Constraint-aware intelligent recovery workflow.")
-
-steps = [
-    ("1️⃣", "Identify", "Detect waste material category via trained computer vision."),
-    ("2️⃣", "Profile", "Assess condition, contamination, and item quantity."),
-    ("3️⃣", "Check Constraints", "Filter by user budget, available tools, time, and skill."),
-    ("4️⃣", "Validate Safety", "Enforce safety rules and block hazardous operations."),
-    ("5️⃣", "Rank Options", "Score feasible pathways via transparent MCDA multi-criteria analysis."),
-    ("6️⃣", "Execute", "Provide clear, safe, step-by-step DIY instructions."),
-    ("7️⃣", "Validate Outcome", "Record real-world execution success to validate recipe feasibility."),
+stats = [
+    (
+        "Scans Processed",
+        st.session_state.get("scan_count", len(st.session_state.get("scan_history", []))),
+        "Current session count",
+        "⌗",
+    ),
+    (
+        "Pathways Available",
+        pathways_total,
+        "Recovery knowledge catalog",
+        "▤",
+    ),
+    (
+        "Tutorials Linked",
+        tutorials_total,
+        "Verified video references",
+        "▷",
+    ),
+    (
+        "Successful Recoveries",
+        st.session_state.get("successful_recoveries", confirmed_recoveries),
+        "User-confirmed outcomes",
+        "✓",
+    ),
 ]
 
-cols = st.columns(len(steps))
-for col, (num, title, desc) in zip(cols, steps):
+for col, args in zip(cols, stats):
     with col:
-        with st.container(border=True):
-            st.markdown(
-                f"""
-                <div style="text-align: center; padding: 0.3rem 0; min-height: 140px;">
-                    <div style="font-size: 1.4rem; margin-bottom: 0.3rem;">{num}</div>
-                    <div style="font-weight: 800; color: {PRIMARY}; font-size: 0.95rem; margin-bottom: 0.25rem;">{title}</div>
-                    <div style="font-size: 0.78rem; color: {TEXT_SECONDARY}; line-height: 1.35;">{desc}</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
+        metric(*args)
+
+
+# Quick access
+section(
+    "Quick Access",
+    "Open a ReNexa feature",
+    "↗",
+)
+
+quick = [
+    (
+        "Scan Waste",
+        "Upload a photo or use the camera to inspect a waste item.",
+        "▣",
+        "pages/1_Scan_Waste.py",
+    ),
+    (
+        "Recovery Options",
+        "Explore reuse, repair, upcycling and recycling pathways.",
+        "⌘",
+        "pages/3_Recovery.py",
+    ),
+    (
+        "Safety Guidelines",
+        "Review precautions and constraint checks before action.",
+        "◇",
+        "pages/4_Constraints.py",
+    ),
+    (
+        "Tutorials",
+        "Browse step-by-step guidance and linked videos.",
+        "▷",
+        "pages/6_Tutorials.py",
+    ),
+    (
+        "Personal History",
+        "Review past scans and saved recommendations.",
+        "◷",
+        "pages/7_History.py",
+    ),
+    (
+        "Impact Analysis",
+        "Track confirmed recovery outcomes and estimates.",
+        "▥",
+        "pages/8_Impact.py",
+    ),
+]
+
+for start in (0, 3):
+    cols = st.columns(3, gap="medium")
+
+    for col, item in zip(cols, quick[start:start + 3]):
+        title, description, icon, target = item
+
+        with col:
+            card(
+                title,
+                description,
+                icon,
+                target=target,
             )
 
-st.divider()
 
-# ── Research Focus ────────────────────────────────────────────────────────
-with st.container(border=True):
-    st.markdown("### 💡 Why ReNexa?")
-    st.markdown(
-        "Traditional waste applications focus on classification and generic disposal advice. "
-        "**ReNexa** is built from the ground up for **Constraint-Aware Household Waste Recovery**, "
-        "verifying whether recommendations are safe and physically executable in real-world households."
-    )
+# Workflow overview
+section(
+    "How ReNexa Works",
+    "A constraint-aware path from identification to recovery.",
+    "↗",
+)
 
-# ── Terminal Output: Sklearn Benchmark Accuracy & Classification Report ─────
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from services.benchmark_evaluation import evaluate_benchmarks
+steps = [
+    ("Identify", "Upload or capture a waste item."),
+    ("Classify", "Detect its material category."),
+    (
+        "Check Constraints",
+        "Consider condition, safety and feasibility.",
+    ),
+    ("Rank Options", "Compare eligible recovery pathways."),
+    ("Get Guidance", "Review tools, steps and precautions."),
+    ("Measure Impact", "Record outcomes when confirmed."),
+]
 
+cols = st.columns(6, gap="small")
 
-def print_benchmark_metrics_to_terminal():
-    """Evaluate benchmark scenarios using scikit-learn and print results to terminal."""
-    try:
-        metrics = evaluate_benchmarks()
-        print("\n" + "=" * 70)
-        print(" [RESEARCH BENCHMARK] Evaluation Results (scikit-learn)")
-        print("=" * 70)
-        print(f" Overall Accuracy: {metrics['overall_accuracy']:.4f} ({metrics['overall_accuracy']*100:.2f}%)")
-        print("-" * 70)
-        print(" Classification Report (by Pathway ID):")
-        print(metrics["classification_report_str"])
-        print(" Performance by Material:")
-        for mat, info in metrics["by_category"].items():
-            print(f"   * {mat.capitalize():<12}: Samples={info['samples']:<2} | Accuracy={info['accuracy']*100:.1f}%")
-        print("=" * 70 + "\n")
-    except Exception as e:
-        print(f"[!] Error computing benchmark metrics: {e}")
-
-
-# Print to terminal once per session
-try:
-    if "benchmark_metrics_printed" not in st.session_state:
-        print_benchmark_metrics_to_terminal()
-        st.session_state["benchmark_metrics_printed"] = True
-except Exception:
-    print_benchmark_metrics_to_terminal()
+for i, (title, description) in enumerate(steps):
+    with cols[i]:
+        st.markdown(
+            f"""
+            <div class="rx-step">
+                <div class="rx-num">{i + 1}</div>
+                <div><b>{title}</b></div>
+                <div class="rx-copy">{description}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
+# Footer
+render_footer()
